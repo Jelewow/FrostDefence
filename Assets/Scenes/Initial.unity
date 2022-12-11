@@ -373,6 +373,10 @@ PrefabInstance:
       propertyPath: _timeToFade
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 677297963636258192, guid: 92bbe2849b582b145bcc2e89464024ca, type: 3}
+      propertyPath: _canvasGroup
+      value: 
+      objectReference: {fileID: 2015325770323228228}
     - target: {fileID: 5805262694718490396, guid: 92bbe2849b582b145bcc2e89464024ca, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -474,3 +478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9b3ed5953c412d8bfec077f8bf1119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &2015325770323228228 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5805262694718490400, guid: 92bbe2849b582b145bcc2e89464024ca, type: 3}
+  m_PrefabInstance: {fileID: 2015325770323228226}
+  m_PrefabAsset: {fileID: 0}
