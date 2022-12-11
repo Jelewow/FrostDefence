@@ -5,16 +5,13 @@ using UnityEngine;
 
 namespace Jelewow.FrostDefence.Core
 {
-    [RequireComponent(typeof(CanvasGroup))]
     public class LoadingCurtain : MonoBehaviour
     {
         [SerializeField] private float _timeToFade;
-        
-        private CanvasGroup _canvasGroup;
-        
+        [SerializeField] private CanvasGroup _canvasGroup;
+
         private void Awake()
         {
-            _canvasGroup = GetComponent<CanvasGroup>();
             DontDestroyOnLoad(this);
         }
 
@@ -37,7 +34,7 @@ namespace Jelewow.FrostDefence.Core
                 step += Time.deltaTime;
                 yield return null;
             }
-            
+
             gameObject.SetActive(false);
         }
     }

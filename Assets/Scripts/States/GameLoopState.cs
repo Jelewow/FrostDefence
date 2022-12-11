@@ -1,4 +1,4 @@
-namespace Jelewow.FrostDefence.Infrastructure
+namespace Jelewow.FrostDefence.Infrastructure.States
 {
     public class GameLoopState : IState
     {

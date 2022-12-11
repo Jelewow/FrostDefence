@@ -1,20 +1,21 @@
 using System;
 using System.Collections.Generic;
 using Jelewow.FrostDefence.Core;
+using Jelewow.FrostDefence.Infrastructure.Services;
 
-namespace Jelewow.FrostDefence.Infrastructure
+namespace Jelewow.FrostDefence.Infrastructure.States
 {
     public class GameStateMachine
     {
         private readonly Dictionary<Type,IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, AllServices services)
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>()),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }

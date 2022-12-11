@@ -3,7 +3,7 @@ using Jelewow.FrostDefence.Auxiliary;
 using Jelewow.FrostDefence.Core;
 using UnityEngine;
 
-namespace Jelewow.FrostDefence.Infrastructure
+namespace Jelewow.FrostDefence.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<string>
     {
@@ -12,11 +12,12 @@ namespace Jelewow.FrostDefence.Infrastructure
         private readonly LoadingCurtain _loadingCurtain;
         private readonly IGameFactory _gameFactory;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain)
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
+            _gameFactory = gameFactory;
         }
 
         public void Enter(string sceneName)
@@ -32,8 +33,8 @@ namespace Jelewow.FrostDefence.Infrastructure
         
         private void OnLoaded()
         {
-            _gameFactory.CreateHero(GameObject.FindWithTag(GameConstants.Tags.InitialPoint).transform.position);
-            _gameStateMachine.Enter<GameLoopState>() ;
+            _gameFactory.CreateHero(GameObject.FindWithTag(GameConstants.Tags.InitialPoint).transform.position);  
+            _gameStateMachine.Enter<GameLoopState>();
         }
     }
 }

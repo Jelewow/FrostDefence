@@ -1,4 +1,6 @@
 using Jelewow.FrostDefence.Core;
+using Jelewow.FrostDefence.Infrastructure.Services;
+using Jelewow.FrostDefence.Infrastructure.States;
 
 namespace Jelewow.FrostDefence.Infrastructure
 {
@@ -8,7 +10,7 @@ namespace Jelewow.FrostDefence.Infrastructure
 
         public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingCurtain); 
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingCurtain, AllServices.Container); 
         }
     }
 }
