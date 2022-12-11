@@ -2,7 +2,7 @@ using System;
 using Jelewow.FrostDefence.Auxiliary;
 using UnityEngine;
 
-namespace Jelewow.FrostDefence.Infrastructure
+namespace Jelewow.FrostDefence.Infrastructure.States
 {
     public class BootstrapState : IState
     {

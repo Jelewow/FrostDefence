@@ -3,7 +3,7 @@ using Jelewow.FrostDefence.Auxiliary;
 using Jelewow.FrostDefence.Core;
 using UnityEngine;
 
-namespace Jelewow.FrostDefence.Infrastructure
+namespace Jelewow.FrostDefence.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<string>
     {
@@ -32,7 +32,7 @@ namespace Jelewow.FrostDefence.Infrastructure
         
         private void OnLoaded()
         {
-            _gameFactory.CreateHero(GameObject.FindWithTag(GameConstants.Tags.InitialPoint).transform.position);
+            _gameFactory.CreateHero(GameObject.FindWithTag(GameConstants.Tags.InitialPoint).transform.position);  
             _gameStateMachine.Enter<GameLoopState>() ;
         }
     }

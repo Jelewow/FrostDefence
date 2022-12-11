@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Jelewow.FrostDefence.Core;
 
-namespace Jelewow.FrostDefence.Infrastructure
+namespace Jelewow.FrostDefence.Infrastructure.States
 {
     public class GameStateMachine
     {
