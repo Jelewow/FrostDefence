@@ -2,7 +2,6 @@ using Jelewow.FrostDefence.Auxiliary;
 using Jelewow.FrostDefence.Data;
 using Jelewow.FrostDefence.Infrastructure.Services;
 using Jelewow.FrostDefence.Infrastructure.Services.SaveLoad;
-using UnityEngine;
 
 namespace Jelewow.FrostDefence.Infrastructure.States
 {
@@ -25,8 +24,6 @@ namespace Jelewow.FrostDefence.Infrastructure.States
             LoadProgressOrInitNew();
             _gameStateMachine.Enter<LoadLevelState, string>(_progressService.Progress.WorldData.CameraPositionOnLevel
                 .Level);
-            
-            //_gameStateMachine.Enter<LoadLevelState, string>(GameConstants.Scenes.Main);
         }
 
         public void Exit()
@@ -40,7 +37,6 @@ namespace Jelewow.FrostDefence.Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            Debug.Log("load");
             return new PlayerProgress(GameConstants.Scenes.Main);
         }
     }

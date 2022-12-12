@@ -47,7 +47,6 @@ namespace Jelewow.FrostDefence.Infrastructure.States
         {
             foreach (var progressReader in _gameFactory.ProgressReaders)
             {
-                Debug.Log(_progressService.Progress);
                 progressReader.LoadProgress(_progressService.Progress);
             }
         }

@@ -10,6 +10,8 @@ namespace Jelewow.FrostDefence.Editor
         {
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
+            
+            Debug.Log("Player Prefs was cleared!");
         }
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace Jelewow.FrostDefence.Data
 {
@@ -10,10 +9,7 @@ namespace Jelewow.FrostDefence.Data
 
         public WorldData(string initialLevel)
         {
-            Debug.Log("world data");
             CameraPositionOnLevel = new CameraPositionOnLevel(initialLevel);
-            Debug.Log("create");
-            Debug.Log(CameraPositionOnLevel);
         }
     }
 }

@@ -24,8 +24,9 @@ namespace Jelewow.FrostDefence.Core
             }
             
             _saveLoadService.SaveProgress();
-            Debug.Log("Progress saved!");
             gameObject.SetActive(false);
+            
+            Debug.Log("Progress saved!");
         }
 
         private void OnDrawGizmos()

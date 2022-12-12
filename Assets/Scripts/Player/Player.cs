@@ -17,16 +17,12 @@ namespace DefaultNamespace
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            Debug.Log("update");
-            
             progress.WorldData.CameraPositionOnLevel = new CameraPositionOnLevel(GetLevelName(),
-                _camera.transform.position.AsVectorData());
+               transform.position.AsVectorData());
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
-            Debug.Log(progress.WorldData.CameraPositionOnLevel);
-            
             if (GetLevelName() != progress.WorldData.CameraPositionOnLevel.Level)
             {
                 return;
@@ -39,7 +35,7 @@ namespace DefaultNamespace
                 return;
             }
             
-            _camera.transform.position = savedPosition.AsUnityVector();
+            transform.position = savedPosition.AsUnityVector();
         }
 
         private string GetLevelName()

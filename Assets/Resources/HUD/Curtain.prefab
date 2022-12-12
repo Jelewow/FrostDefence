@@ -263,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToFade: 2
+  _canvasGroup: {fileID: 5805262694718490400}
 --- !u!1 &5805262695540191694
 GameObject:
   m_ObjectHideFlags: 0
