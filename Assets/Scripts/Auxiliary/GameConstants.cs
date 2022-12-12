@@ -20,5 +20,10 @@ namespace Jelewow.FrostDefence.Auxiliary
             
             public const string Player = "Test/TestPlayer";
         }
+
+        public static class PrefKeys
+        {
+            public const string Progress = nameof(Progress);
+        }
     }
 }

@@ -1,6 +1,7 @@
 using Jelewow.FrostDefence.Auxiliary;
 using Jelewow.FrostDefence.Infrastructure.AssetManagement;
 using Jelewow.FrostDefence.Infrastructure.Services;
+using Jelewow.FrostDefence.Infrastructure.Services.SaveLoad;
 
 namespace Jelewow.FrostDefence.Infrastructure.States
 {
@@ -31,14 +32,18 @@ namespace Jelewow.FrostDefence.Infrastructure.States
         
         private void EnterLoadLevel()
         {
-            _stateMachine.Enter<LoadLevelState, string>(GameConstants.Scenes.Main);
+            _stateMachine.Enter<LoadProgressState>();
         }
         
         private void RegisterServices()
         {
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>()));
+            
             _services.RegisterSingle<IPersistantProgressService>(new PersistantProgressService());
+            
+            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>()));
+
+            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistantProgressService>(), _services.Single<IGameFactory>()));
         }
     }
 }

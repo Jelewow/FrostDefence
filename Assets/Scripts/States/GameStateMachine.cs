@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using Jelewow.FrostDefence.Core;
 using Jelewow.FrostDefence.Infrastructure.Services;
+using Jelewow.FrostDefence.Infrastructure.Services.SaveLoad;
 
 namespace Jelewow.FrostDefence.Infrastructure.States
 {
     public class GameStateMachine
     {
-        private readonly Dictionary<Type,IExitableState> _states;
+        private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
         public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, AllServices services)
@@ -15,34 +16,41 @@ namespace Jelewow.FrostDefence.Infrastructure.States
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>()),
+
+                [typeof(LoadLevelState)] =
+                    new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>(),
+                        services.Single<IPersistantProgressService>()),
+
+                [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistantProgressService>(),
+                    services.Single<ISaveLoadService>()),
+
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }
-        
+
         public void Enter<TState>() where TState : class, IState
         {
-            IState state = EnterState<TState>(); 
+            IState state = EnterState<TState>();
             state.Enter();
         }
-        
+
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
             TState state = EnterState<TState>();
             state.Enter(payload);
         }
-        
+
         private TState EnterState<TState>() where TState : class, IExitableState
         {
             _activeState?.Exit();
-            var state = GetState<TState>(); 
+            var state = GetState<TState>();
             _activeState = state;
             return state;
         }
-        
-        private TState GetState<TState>() where TState : class, IExitableState 
+
+        private TState GetState<TState>() where TState : class, IExitableState
         {
-            return _states[typeof(TState)] as TState ;
+            return _states[typeof(TState)] as TState;
         }
     }
 }

@@ -1,4 +1,4 @@
-using Jelewow.FrostDefence.Auxiliary.Ententions;
+using Jelewow.FrostDefence.Auxiliary.Extensions;
 using Jelewow.FrostDefence.Data;
 using Jelewow.FrostDefence.Services.PersistantProgress;
 using UnityEngine;
@@ -6,28 +6,45 @@ using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace
 {
-    public class Player : ISavedProgress
+    public class Player : MonoBehaviour, ISavedProgress
     {
-        public void UpdateProgress(PlayerProgress progress)
+        private Camera _camera;
+
+        private void Awake()
         {
-            progress.WorldData.CameraPositionOnLevel = new CameraPositionOnLevel(GetLevelName(),
-                Camera.main.transform.position.AsVectorData());
+            _camera = Camera.main;
         }
 
-        private static string GetLevelName()
+        public void UpdateProgress(PlayerProgress progress)
         {
-            return SceneManager.GetActiveScene().name;
+            Debug.Log("update");
+            
+            progress.WorldData.CameraPositionOnLevel = new CameraPositionOnLevel(GetLevelName(),
+                _camera.transform.position.AsVectorData());
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
+            Debug.Log(progress.WorldData.CameraPositionOnLevel);
+            
             if (GetLevelName() != progress.WorldData.CameraPositionOnLevel.Level)
             {
                 return;
             }
             
             var savedPosition = progress.WorldData.CameraPositionOnLevel.Position;
-            Camera.main.transform.position = savedPosition.AsUnityVector();
+
+            if (savedPosition == null)
+            {
+                return;
+            }
+            
+            _camera.transform.position = savedPosition.AsUnityVector();
+        }
+
+        private string GetLevelName()
+        {
+            return SceneManager.GetActiveScene().name;
         }
     }
 }

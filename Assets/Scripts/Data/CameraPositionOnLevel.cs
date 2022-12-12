@@ -1,5 +1,8 @@
+using System;
+
 namespace Jelewow.FrostDefence.Data
 {
+    [Serializable]
     public class CameraPositionOnLevel
     {
         public string Level;
@@ -9,6 +12,11 @@ namespace Jelewow.FrostDefence.Data
         {
             Level = level;
             Position = position;
+        }
+
+        public CameraPositionOnLevel(string initialLevel)
+        {
+            Level = initialLevel;
         }
     }
 }
