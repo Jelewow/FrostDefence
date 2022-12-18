@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Jelewow.FrostDefence.Auxiliary
 {
     public static class GameConstants
@@ -24,6 +26,11 @@ namespace Jelewow.FrostDefence.Auxiliary
         public static class PrefKeys
         {
             public const string Progress = nameof(Progress);
+        }
+
+        public static class Animation
+        {
+            public static readonly int Die = Animator.StringToHash(nameof(Die));
         }
     }
 }
